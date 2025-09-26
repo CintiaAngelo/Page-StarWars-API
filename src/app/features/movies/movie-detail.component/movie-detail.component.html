@@ -1,0 +1,30 @@
+<div class="page-container">
+  <section class="section">
+    <div class="container">
+      <button class="back-button" routerLink="/movies">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Voltar para o catálogo
+      </button>
+
+      <ng-container *ngIf="!film; else content">
+        <app-spinner></app-spinner>
+      </ng-container>
+
+      <ng-template #content>
+        <div class="details-container">
+          <h1 class="star-wars-font">{{film?.title}} (Ep. {{film?.episode_id}})</h1>
+          <p class="details-text"><strong>Diretor:</strong> {{film?.director}} • <strong>Data:</strong> {{film?.release_date}}</p>
+          <hr class="divider">
+          <h3 class="opening-crawl-title">Opening crawl</h3>
+          <p class="opening-crawl-text">{{film?.opening_crawl}}</p>
+          <h4 class="characters-title">Elenco (amostra)</h4>
+          <ul class="characters-list">
+            <li *ngFor="let c of characters">{{c?.name || '— carregando —'}}</li>
+          </ul>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>

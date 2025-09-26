@@ -1,0 +1,65 @@
+.back-button {
+  background: transparent;
+  border: none;
+  color: #fcd34d;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #fff;
+}
+
+.details-container {
+  padding: 32px 0;
+}
+
+.details-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.details-text {
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.divider {
+  margin: 12px 0;
+  border: none;
+  border-top: 1px solid #1f2937;
+}
+
+.opening-crawl-title {
+  font-size: 1.5rem;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.opening-crawl-text {
+  white-space: pre-wrap;
+  color: #d1d5db;
+  font-size: 1.125rem;
+}
+
+.characters-title {
+  font-size: 1.25rem;
+  margin-top: 18px;
+}
+
+.characters-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.characters-list li {
+  font-size: 1rem;
+  color: #fcd34d;
+  padding: 4px 0;
+}
