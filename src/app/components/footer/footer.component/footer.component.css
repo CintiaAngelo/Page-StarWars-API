@@ -1,0 +1,179 @@
+/* Container e layout */
+footer {
+  position: relative;
+  background-image: linear-gradient(to top, #000, #1f2937, #111827);
+  color: white;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin-top: 5rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.md\:col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+/* Títulos */
+.brand-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #fcd34d, #f9607f, #f06292);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.developer-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #a78bfa, #f472b6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+/* Cartão do desenvolvedor */
+.developer-credit-card {
+  background-image: linear-gradient(to right, rgba(82, 38, 150, 0.3), rgba(49, 46, 129, 0.3));
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Ícones sociais */
+.social-icon-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-property: background-color, transform;
+  transition-duration: 0.3s;
+}
+
+/* Navegação e lista de tecnologias */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Rodapé */
+.border-t {
+  border-top: 1px solid #374151;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.starfield-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background-color: #93c5fd;
+  border-radius: 50%;
+  animation: star-glow 4s infinite, star-move 60s linear infinite;
+}
+
+/* Geração de estrelas com posições e tempos aleatórios */
+@for $i from 1 through 50 {
+  .star:nth-child(#{$i}) {
+    top: #{random(100)}%;
+    left: #{random(100)}%;
+    animation-delay: #{(random(40) / 10)}s;
+    animation-duration: #{random(3) + 2}s;
+  }
+}
+
+@keyframes star-glow {
+  0% { opacity: 0.2; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.2; transform: scale(0.5); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.md\:col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.developer-credit-card {
+  background-image: linear-gradient(to right, rgba(82, 38, 150, 0.3), rgba(49, 46, 129, 0.3));
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+/* Seções de links */
+.text-gray-300 {
+  color: #d1d5db;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.space-y-3 > * + * {
+  margin-top: 0.75rem;
+}

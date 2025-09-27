@@ -1,0 +1,143 @@
+<div class="min-h-screen">
+  <div *ngIf="loading" class="min-h-screen flex items-center justify-center">
+    <div class="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <div *ngIf="!loading && !planet" class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-red-400 mb-4">Planeta não encontrado</h2>
+      <a routerLink="/planets" class="text-yellow-400 hover:text-yellow-300">
+        Voltar aos planetas
+      </a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="planet">
+    <section class="relative h-screen flex items-center">
+      <div class="absolute inset-0">
+        <img [src]="getPlanetImage(planet.name)" [alt]="planet.name" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 container mx-auto px-4">
+        <div class="max-w-2xl">
+          <div @fadeSlideIn class="mb-8">
+            <a routerLink="/planets" class="inline-flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+              <lucide-icon name="arrow-left" size="20"></lucide-icon>
+              <span>Voltar aos Planetas</span>
+            </a>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.1s" class="mb-4">
+            <div class="inline-block bg-yellow-400 text-black p-3 rounded-full">
+              <lucide-icon name="globe" size="32"></lucide-icon>
+            </div>
+          </div>
+
+          <h1 @fadeSlideIn style="transition-delay: 0.2s" class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6" style="font-family: 'Orbitron'">
+            {{planet.name}}
+          </h1>
+
+          <div @fadeSlideIn style="transition-delay: 0.3s" class="flex flex-wrap items-center gap-6 text-gray-300 mb-8">
+            <div *ngIf="planet.climate !== 'unknown'" class="flex items-center space-x-2">
+              <lucide-icon name="thermometer" size="20"></lucide-icon>
+              <span class="capitalize">{{planet.climate}}</span>
+            </div>
+            <div *ngIf="planet.terrain !== 'unknown'" class="flex items-center space-x-2">
+              <lucide-icon name="mountain" size="20"></lucide-icon>
+              <span class="capitalize">{{planet.terrain}}</span>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.4s" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div *ngIf="planet.diameter !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="globe" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{parseInt(planet.diameter).toLocaleString()}}km</div>
+              <div class="text-gray-400 text-sm">Diâmetro</div>
+            </div>
+            <div *ngIf="planet.population !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="users" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{formatPopulation(planet.population)}}</div>
+              <div class="text-gray-400 text-sm">População</div>
+            </div>
+            <div *ngIf="planet.rotation_period !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="clock" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{planet.rotation_period}}h</div>
+              <div class="text-gray-400 text-sm">Dia</div>
+            </div>
+            <div *ngIf="planet.orbital_period !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="zap" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{planet.orbital_period}}d</div>
+              <div class="text-gray-400 text-sm">Ano</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div @fadeSlideIn class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Características Ambientais</h3>
+            <div class="space-y-4">
+              <div *ngIf="planet.climate !== 'unknown'">
+                <span class="text-gray-400">Clima:</span>
+                <p class="text-white font-semibold capitalize">{{planet.climate}}</p>
+              </div>
+              <div *ngIf="planet.terrain !== 'unknown'">
+                <span class="text-gray-400">Terreno:</span>
+                <p class="text-white font-semibold capitalize">{{planet.terrain}}</p>
+              </div>
+              <div *ngIf="planet.surface_water !== 'unknown'">
+                <span class="text-gray-400">Água Superficial:</span>
+                <p class="text-white font-semibold">{{planet.surface_water}}%</p>
+              </div>
+              <div *ngIf="planet.gravity !== 'unknown'">
+                <span class="text-gray-400">Gravidade:</span>
+                <p class="text-white font-semibold">{{planet.gravity}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.1s" class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Estatísticas</h3>
+            <div class="space-y-4">
+              <div>
+                <span class="text-gray-400">Residentes Conhecidos:</span>
+                <p class="text-white font-semibold">{{planet.residents.length}}</p>
+              </div>
+              <div>
+                <span class="text-gray-400">Aparições em Filmes:</span>
+                <p class="text-white font-semibold">{{planet.films.length}}</p>
+              </div>
+              <div *ngIf="planet.diameter !== 'unknown'">
+                <span class="text-gray-400">Diâmetro:</span>
+                <p class="text-white font-semibold">{{parseInt(planet.diameter).toLocaleString()}} km</p>
+              </div>
+              <div *ngIf="planet.population !== 'unknown'">
+                <span class="text-gray-400">População Total:</span>
+                <p class="text-white font-semibold">{{formatPopulation(planet.population)}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.2s" class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Explorar Mais</h3>
+            <div class="space-y-3">
+              <a routerLink="/characters" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Ver Personagens</span>
+              </a>
+              <a routerLink="/movies" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Ver Filmes</span>
+              </a>
+              <a routerLink="/species" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Explorar Espécies</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

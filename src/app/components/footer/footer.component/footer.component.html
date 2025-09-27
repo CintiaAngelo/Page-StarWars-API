@@ -1,0 +1,79 @@
+<footer class="relative bg-gradient-to-t from-black via-gray-900 to-gray-800 text-white py-16 mt-20">
+  <div class="starfield-background">
+    <div *ngFor="let i of [].constructor(50)" class="star"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div class="md:col-span-2">
+        <div class="mb-6">
+          <h3 class="brand-title">Star Wars Stream</h3>
+          <p class="text-gray-300 text-lg leading-relaxed max-w-md">
+            Uma galáxia muito, muito distante agora está ao seu alcance. 
+            Explore o universo Star Wars com dados oficiais da SWAPI.
+          </p>
+        </div>
+
+        <div class="developer-credit-card">
+          <div class="flex items-center mb-3">
+            <lucide-icon name="code" class="w-5 h-5 text-purple-400 mr-2"></lucide-icon>
+            <span class="text-purple-300 font-semibold">Desenvolvido com</span>
+            <lucide-icon name="heart" class="w-4 h-4 text-red-400 mx-2 animate-pulse"></lucide-icon>
+            <span class="text-purple-300 font-semibold">por</span>
+          </div>
+          <h4 class="developer-name">
+            Cintia Cristina Braga Angelo
+          </h4>
+          <p class="text-gray-400 text-sm">
+            Desenvolvedora Full Stack • Angular & TypeScript Specialist
+          </p>
+          
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="social-icon-button bg-purple-600/20 border border-purple-500/30">
+              <lucide-icon name="github" class="w-5 h-5 text-purple-300"></lucide-icon>
+            </a>
+            <a href="#" class="social-icon-button bg-blue-600/20 border border-blue-500/30">
+              <lucide-icon name="linkedin" class="w-5 h-5 text-blue-300"></lucide-icon>
+            </a>
+            <a href="#" class="social-icon-button bg-red-600/20 border border-red-500/30">
+              <lucide-icon name="mail" class="w-5 h-5 text-red-300"></lucide-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xl font-semibold text-yellow-400 mb-6">Explorar</h4>
+        <ul class="space-y-3">
+          <li *ngFor="let item of navItems">
+            <a [routerLink]="item.path"
+               class="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+              <lucide-icon name="star" class="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+              {{item.label}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xl font-semibold text-yellow-400 mb-6">Tecnologias</h4>
+        <ul class="space-y-3">
+          <li *ngFor="let tech of techItems" class="text-gray-300 flex items-center">
+            <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+            {{tech}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <div class="text-gray-400 text-sm mb-4 md:mb-0">
+        © {{currentYear}} Star Wars Stream. Dados fornecidos pela SWAPI.
+      </div>
+      
+      <div class="flex items-center text-gray-400 text-sm">
+        <span class="mr-2">Que a Força esteja com você</span>
+        <lucide-icon name="star" class="w-4 h-4 text-yellow-400 animate-spin-slow"></lucide-icon>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,36 @@
+<header class="relative z-50 bg-black/80 backdrop-blur-md border-b border-yellow-400/30">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a routerLink="/" class="flex items-center space-x-3">
+        <div class="logo-text">STAR WARS</div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a *ngFor="let item of navItems"
+           [routerLink]="item.path"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="nav-item">
+          {{item.label}}
+        </a>
+      </nav>
+
+      <button (click)="isMenuOpen = !isMenuOpen" class="md:hidden p-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+        <lucide-icon [name]="isMenuOpen ? 'x' : 'menu'"></lucide-icon>
+      </button>
+    </div>
+
+    <nav [@menuAnimation]="isMenuOpen ? 'open' : 'closed'" class="md:hidden overflow-hidden">
+      <div class="py-4 space-y-2">
+        <a *ngFor="let item of navItems"
+           [routerLink]="item.path"
+           (click)="isMenuOpen = false"
+           routerLinkActive="active-mobile-link"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="block px-3 py-2 text-sm font-medium transition-colors duration-300 rounded-lg mobile-nav-item">
+          {{item.label}}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>

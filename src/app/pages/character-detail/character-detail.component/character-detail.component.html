@@ -1,0 +1,139 @@
+<div class="min-h-screen">
+  <div *ngIf="loading" class="min-h-screen flex items-center justify-center">
+    <div class="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <div *ngIf="!loading && !character" class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-red-400 mb-4">Personagem não encontrado</h2>
+      <a routerLink="/characters" class="text-yellow-400 hover:text-yellow-300">
+        Voltar aos personagens
+      </a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="character">
+    <section class="relative h-screen flex items-center">
+      <div class="absolute inset-0">
+        <img [src]="getCharacterImage(character.name)" [alt]="character.name" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 container mx-auto px-4">
+        <div class="max-w-2xl">
+          <div @fadeSlideIn class="mb-8">
+            <a routerLink="/characters" class="inline-flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+              <lucide-icon name="arrow-left" size="20"></lucide-icon>
+              <span>Voltar aos Personagens</span>
+            </a>
+          </div>
+
+          <div @fadeSlideIn class="mb-4" style="transition-delay: 0.1s">
+            <div class="inline-block bg-yellow-400 text-black p-3 rounded-full">
+              <lucide-icon name="user" size="32"></lucide-icon>
+            </div>
+          </div>
+
+          <h1 @fadeSlideIn style="transition-delay: 0.2s" class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6" style="font-family: 'Orbitron'">
+            {{character.name}}
+          </h1>
+
+          <div @fadeSlideIn style="transition-delay: 0.3s" class="flex flex-wrap items-center gap-6 text-gray-300 mb-8">
+            <div *ngIf="character.birth_year !== 'unknown'" class="flex items-center space-x-2">
+              <lucide-icon name="calendar" size="20"></lucide-icon>
+              <span>{{character.birth_year}}</span>
+            </div>
+            <div *ngIf="character.gender !== 'unknown'" class="flex items-center space-x-2">
+              <lucide-icon name="user" size="20"></lucide-icon>
+              <span class="capitalize">{{character.gender}}</span>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.4s" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div *ngIf="character.height !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="ruler" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{character.height}}cm</div>
+              <div class="text-gray-400 text-sm">Altura</div>
+            </div>
+            <div *ngIf="character.mass !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="weight" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold">{{character.mass}}kg</div>
+              <div class="text-gray-400 text-sm">Peso</div>
+            </div>
+            <div *ngIf="character.eye_color !== 'unknown'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="eye" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold capitalize">{{character.eye_color}}</div>
+              <div class="text-gray-400 text-sm">Olhos</div>
+            </div>
+            <div *ngIf="character.hair_color !== 'unknown' && character.hair_color !== 'n/a'" class="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
+              <lucide-icon name="user" class="mx-auto mb-2 text-yellow-400" size="24"></lucide-icon>
+              <div class="text-white font-bold capitalize">{{character.hair_color}}</div>
+              <div class="text-gray-400 text-sm">Cabelo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div @fadeSlideIn class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Características Físicas</h3>
+            <div class="space-y-4">
+              <div *ngIf="character.skin_color !== 'unknown'">
+                <span class="text-gray-400">Cor da Pele:</span>
+                <p class="text-white font-semibold capitalize">{{character.skin_color}}</p>
+              </div>
+              <div *ngIf="character.hair_color !== 'unknown' && character.hair_color !== 'n/a'">
+                <span class="text-gray-400">Cor do Cabelo:</span>
+                <p class="text-white font-semibold capitalize">{{character.hair_color}}</p>
+              </div>
+              <div *ngIf="character.eye_color !== 'unknown'">
+                <span class="text-gray-400">Cor dos Olhos:</span>
+                <p class="text-white font-semibold capitalize">{{character.eye_color}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.1s" class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Aparições</h3>
+            <div class="space-y-4">
+              <div>
+                <span class="text-gray-400">Filmes:</span>
+                <p class="text-white font-semibold">{{character.films.length}}</p>
+              </div>
+              <div>
+                <span class="text-gray-400">Veículos:</span>
+                <p class="text-white font-semibold">{{character.vehicles.length}}</p>
+              </div>
+              <div>
+                <span class="text-gray-400">Naves:</span>
+                <p class="text-white font-semibold">{{character.starships.length}}</p>
+              </div>
+              <div>
+                <span class="text-gray-400">Espécies:</span>
+                <p class="text-white font-semibold">{{character.species.length || 1}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div @fadeSlideIn style="transition-delay: 0.2s" class="card-details">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Explorar Mais</h3>
+            <div class="space-y-3">
+              <a routerLink="/movies" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Ver Filmes</span>
+              </a>
+              <a routerLink="/planets" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Explorar Planetas</span>
+              </a>
+              <a routerLink="/vehicles" class="block p-3 bg-gray-800/50 rounded-lg hover:bg-yellow-400/10 hover:border-yellow-400 border border-transparent transition-all duration-300">
+                <span class="text-yellow-400 font-semibold">Ver Veículos</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

@@ -1,38 +1,70 @@
+// src/app/services/swapi.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SwapiFilm, SwapiPerson } from '../models';
-import { Observable, forkJoin, map, of, shareReplay, catchError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class SwapiService {
-  private base = 'https://swapi.dev/api';
-  private films$?: Observable<SwapiFilm[]>;
+  private readonly API_URL = 'https://swapi.dev/api/';
 
   constructor(private http: HttpClient) {}
 
-  getFilms(): Observable<SwapiFilm[]> {
-    if (!this.films$) {
-      this.films$ = this.http.get<{ results: SwapiFilm[] }>(`${this.base}/films/`).pipe(
-        map(r => r.results.sort((a, b) => a.episode_id - b.episode_id)),
-        shareReplay(1)
-      );
-    }
-    return this.films$;
+  /**
+   * Busca uma coleção de recursos da API SWAPI.
+   * @param endpoint O nome do endpoint (ex: 'films', 'people', 'planets').
+   * @returns Um Observable da coleção de recursos.
+   */
+  private getCollection(endpoint: string): Observable<any[]> {
+    return this.http.get<any>(`${this.API_URL}${endpoint}/`).pipe(
+      map(res => res.results)
+    );
   }
 
-  getFilmByEpisode(episode: number): Observable<SwapiFilm | undefined> {
-    return this.getFilms().pipe(map(f => f.find(x => x.episode_id === episode)));
+  /**
+   * Busca um recurso específico por ID.
+   * @param endpoint O nome do endpoint.
+   * @param id O ID do recurso.
+   * @returns Um Observable do recurso.
+   */
+  private getItem(endpoint: string, id: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}${endpoint}/${id}/`);
   }
 
-  getPerson(url: string): Observable<SwapiPerson | null> {
-    // SWAPI sometimes enforces CORS; in dev it usually works.
-    return this.http.get<SwapiPerson>(url).pipe(catchError(() => of(null)));
+  // Métodos Públicos para os endpoints
+  getFilms(): Observable<any[]> {
+    return this.getCollection('films').pipe(
+      map(films => films.sort((a, b) => a.episode_id - b.episode_id))
+    );
   }
 
-  getPeople(urls: string[], limit = 6): Observable<(SwapiPerson | null)[]> {
-    const slice = urls.slice(0, limit);
-    if (slice.length === 0) return of([]);
-    const calls = slice.map(u => this.getPerson(u));
-    return forkJoin(calls);
+  getFilm(id: string): Observable<any> {
+    return this.getItem('films', id);
+  }
+
+  getCharacters(): Observable<any[]> {
+    return this.getCollection('people');
+  }
+
+  getCharacter(id: string): Observable<any> {
+    return this.getItem('people', id);
+  }
+
+  getPlanets(): Observable<any[]> {
+    return this.getCollection('planets');
+  }
+
+  getPlanet(id: string): Observable<any> {
+    return this.getItem('planets', id);
+  }
+  
+  getSpecies(): Observable<any[]> {
+    return this.getCollection('species');
+  }
+
+  getVehicles(): Observable<any[]> {
+    return this.getCollection('vehicles');
   }
 }

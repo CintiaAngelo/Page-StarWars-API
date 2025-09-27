@@ -1,0 +1,66 @@
+<div class="min-h-screen py-20 px-4">
+  <div class="container mx-auto">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6" style="font-family: 'Orbitron'">
+        A SAGA COMPLETA
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        Todos os episódios da saga Star Wars em ordem cronológica
+      </p>
+    </div>
+
+    <div *ngIf="loading" class="flex items-center justify-center">
+      <div class="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <div *ngIf="!loading" @listAnimation class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <a *ngFor="let movie of movies; let i = index" [routerLink]="['/movies', getMovieId(movie.url)]"
+         class="group block bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-yellow-400/50 transition-all duration-500 transform hover:scale-103 hover:-translate-y-10px">
+        <div class="relative h-64 overflow-hidden">
+          <img [src]="getMoviePoster(movie.episode_id)" [alt]="movie.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          
+          <div class="absolute top-4 left-4">
+            <div class="bg-yellow-400 text-black px-3 py-1 rounded-full font-bold text-sm">
+              Episódio {{movie.episode_id}}
+            </div>
+          </div>
+
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="bg-yellow-400 text-black p-4 rounded-full transform scale-75 group-hover:scale-100 transition-transform duration-300">
+              <lucide-icon name="play" size="32"></lucide-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-3 group-hover:text-yellow-300 transition-colors">
+            {{movie.title}}
+          </h3>
+          <div class="flex items-center space-x-4 text-sm text-gray-400 mb-4">
+            <div class="flex items-center space-x-1">
+              <lucide-icon name="calendar" size="16"></lucide-icon>
+              <span>{{movie.release_date | date: 'yyyy'}}</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <lucide-icon name="star" size="16"></lucide-icon>
+              <span>Diretor: {{movie.director}}</span>
+            </div>
+          </div>
+          <p class="text-gray-300 text-sm line-clamp-3 group-hover:text-gray-200 transition-colors">
+            {{movie.opening_crawl.substring(0, 150)}}...
+          </p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-yellow-400 font-semibold group-hover:text-yellow-300">
+              Ver Detalhes
+            </span>
+            <div class="flex items-center space-x-1 text-gray-400">
+              <lucide-icon name="clock" size="16"></lucide-icon>
+              <span>2h 30min</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

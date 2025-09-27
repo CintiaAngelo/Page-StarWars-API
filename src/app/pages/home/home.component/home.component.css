@@ -1,0 +1,124 @@
+/* Geral */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Seção Hero */
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.75rem;
+  font-weight: 900;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(to right, #fcd34d, #d97706);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 5rem;
+  }
+}
+
+.watch-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-image: linear-gradient(to right, #fcd34d, #d97706);
+  color: #000;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+}
+
+.explore-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 2px solid #fcd34d;
+  color: #fcd34d;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #fcd34d;
+  color: #000;
+}
+
+/* Categorias */
+.category-card {
+  display: block;
+  padding: 2rem;
+  background-image: linear-gradient(to bottom right, rgba(17, 24, 39, 0.8), rgba(0, 0, 0, 0.8));
+  backdrop-filter: blur(4px);
+  border: 1px solid #1f2937;
+  border-radius: 1rem;
+  transition: all 0.5s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(252, 211, 77, 0.5);
+}
+
+.icon-container {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+}
+
+/* Gradients para ícones */
+.from-blue-500 { --tw-gradient-from: #3b82f6; }
+.to-purple-600 { --tw-gradient-to: #9333ea; }
+.from-red-500 { --tw-gradient-from: #ef4444; }
+.to-pink-600 { --tw-gradient-to: #db2777; }
+.from-green-500 { --tw-gradient-from: #22c55e; }
+.to-teal-600 { --tw-gradient-to: #0d9488; }
+.from-purple-500 { --tw-gradient-from: #a855f7; }
+.to-indigo-600 { --tw-gradient-to: #4f46e5; }
+.from-orange-500 { --tw-gradient-from: #f97316; }
+.to-red-600 { --tw-gradient-to: #dc2626; }

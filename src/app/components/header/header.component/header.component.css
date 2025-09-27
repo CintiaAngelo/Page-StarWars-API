@@ -1,0 +1,100 @@
+/* Container e layout */
+header {
+  position: relative;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(252, 211, 77, 0.3);
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo-text {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(to right, #fcd34d, #d97706);
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Menu de navegação desktop */
+.nav-item {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  color: #d1d5db;
+}
+
+.nav-item.active-link,
+.nav-item:hover {
+  color: #fcd34d;
+}
+
+.nav-item.active-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #fcd34d;
+}
+
+/* Botão do menu mobile */
+.md\:hidden {
+  display: none;
+}
+
+
+
+/* Menu mobile */
+.mobile-nav-item {
+  transition: color 0.3s, background-color 0.3s;
+  color: #d1d5db;
+}
+
+.mobile-nav-item.active-mobile-link {
+  color: #fcd34d;
+  background-color: rgba(252, 211, 77, 0.1);
+}
+
+.mobile-nav-item:hover {
+  color: #fcd34d;
+  background-color: rgba(252, 211, 77, 0.05);
+}
+
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+  .md\:hidden {
+    display: none;
+  }
+}
+
+/* Estilos para o menu móvel */
+.space-x-8 > * + * {
+  margin-left: 2rem; /* 8 * 0.25rem = 2rem */
+}

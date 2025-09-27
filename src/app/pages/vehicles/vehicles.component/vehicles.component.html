@@ -1,0 +1,54 @@
+<div class="min-h-screen py-20 px-4">
+  <div class="container mx-auto">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6" style="font-family: 'Orbitron'">
+        VEÍCULOS
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        Conheça as naves e transportes icônicos da saga
+      </p>
+    </div>
+
+    <div *ngIf="loading" class="flex items-center justify-center">
+      <div class="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <div *ngIf="!loading" @listAnimation class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div *ngFor="let vehicle of vehicles" class="group block">
+        <div class="card bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-yellow-400/50 transition-all duration-500 transform hover:scale-103">
+          <div class="relative h-48 overflow-hidden">
+            <img [src]="getVehicleImage(vehicle.name)" [alt]="vehicle.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            
+            <div class="absolute top-4 right-4">
+              <div class="bg-yellow-400 text-black p-2 rounded-full">
+                <lucide-icon name="car" size="16"></lucide-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-yellow-400 mb-3 group-hover:text-yellow-300 transition-colors">
+              {{vehicle.name}}
+            </h3>
+
+            <div class="space-y-2 text-sm">
+              <div *ngIf="vehicle.model !== 'unknown'" class="flex items-center space-x-2 text-gray-400">
+                <lucide-icon name="compass" size="14"></lucide-icon>
+                <span>Modelo: {{vehicle.model}}</span>
+              </div>
+              <div *ngIf="vehicle.manufacturer !== 'unknown'" class="flex items-center space-x-2 text-gray-400">
+                <lucide-icon name="factory" size="14"></lucide-icon>
+                <span>Fabricante: {{vehicle.manufacturer}}</span>
+              </div>
+              <div *ngIf="vehicle.cost_in_credits !== 'unknown'" class="flex items-center space-x-2 text-gray-400">
+                <lucide-icon name="dollar-sign" size="14"></lucide-icon>
+                <span>Custo: {{vehicle.cost_in_credits}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

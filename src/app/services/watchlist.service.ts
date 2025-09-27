@@ -1,4 +1,3 @@
-// src/app/services/watchlist.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -21,7 +20,7 @@ export class WatchlistService {
   }
 
   toggle(episode: number) {
-    const arr = this._items.value.slice();
+    const arr = [...this._items.value];
     const idx = arr.indexOf(episode);
     if (idx >= 0) arr.splice(idx, 1); else arr.push(episode);
     this._items.next(arr);
